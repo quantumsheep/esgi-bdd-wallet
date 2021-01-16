@@ -1,6 +1,8 @@
 import { setWorldConstructor } from "@cucumber/cucumber";
+import axios from "axios";
 
 export const STOCKS_CURRENCY = 'USD';
+export const EXCHANGE_RATES_API = 'https://api.exchangeratesapi.io/latest?base=USD';
 
 export interface Stock {
   type: string;
@@ -14,16 +16,27 @@ class CurrencyNotFoundError extends Error {
   }
 }
 
+interface ExchangeRatesDTO {
+  rates: Record<string, number>;
+  base: string;
+  date: string;
+}
+
 export class WalletWorld {
-  private rates = {};
+  private rates: Record<string, number> = {};
 
   private stocks: Stock[] = [];
 
   private value: number = null;
-  private error: Error = null;
+  private error: CurrencyNotFoundError = null;
 
   setStocks(stocks: Stock[]) {
     this.stocks = stocks;
+  }
+
+  async downloadRates() {
+    const { data } = await axios.get<ExchangeRatesDTO>(EXCHANGE_RATES_API);
+    this.rates = data.rates;
   }
 
   private resetConvertion() {

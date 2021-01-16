@@ -23,6 +23,17 @@ Feature: Wallet
             Then an error is returned
             And value should be null
 
+        Example: Converting to CAT using exchangeratesapi.io
+            Given a wallet containing 3 stocks
+                | type    | value    | shares  |
+                | Bitcoin | 37540.00 | 0.06215 |
+                | TLSA    | 826.16   | 3.2     |
+                | PLTR    | 25.64    | 21      |
+            And exchange rates fetched from exchangeratesapi.io
+            When converting to "CAT"
+            Then an error is returned
+            And value should be null
+
     Rule: Return 0 when the wallet is empty
         Example: Converting to EUR
             Given a wallet containing 0 stocks
@@ -53,4 +64,15 @@ Feature: Wallet
             And USD to "JPY" rate is 103.7202012703
             When converting to "JPY"
             Then value should be 572044.1884186385
+            And error should be null
+
+        Example: Converting to JPY using exchangeratesapi.io
+            Given a wallet containing 3 stocks
+                | type    | value    | shares  |
+                | Bitcoin | 37540.00 | 0.06215 |
+                | TLSA    | 826.16   | 3.2     |
+                | PLTR    | 25.64    | 21      |
+            And exchange rates fetched from exchangeratesapi.io
+            When converting to "JPY"
+            Then value should not be null
             And error should be null

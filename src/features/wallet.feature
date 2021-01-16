@@ -1,12 +1,13 @@
 Feature: Wallet
 
-    Check your portfolio's money in any currency
+    Check your portfolio's money in any currency.
+    Every stocks are in USD by default.
 
     Rule: Return an error when target currency is not available
         Example: Converting to KEK
             Given a wallet containing 3 stocks
                 | type    | value    | shares  |
-                | Bitcoin | 37540.00 | 0.06215 |
+                | BTC/USD | 37540.00 | 0.06215 |
                 | TLSA    | 826.16   | 3.2     |
                 | PLTR    | 25.64    | 21      |
             When converting to "KEK"
@@ -16,7 +17,7 @@ Feature: Wallet
         Example: Converting to POG
             Given a wallet containing 3 stocks
                 | type    | value    | shares  |
-                | Bitcoin | 37540.00 | 0.06215 |
+                | BTC/USD | 37540.00 | 0.06215 |
                 | TLSA    | 826.16   | 3.2     |
                 | PLTR    | 25.64    | 21      |
             When converting to "POG"
@@ -26,7 +27,7 @@ Feature: Wallet
         Example: Converting to CAT using exchangeratesapi.io
             Given a wallet containing 3 stocks
                 | type    | value    | shares  |
-                | Bitcoin | 37540.00 | 0.06215 |
+                | BTC/USD | 37540.00 | 0.06215 |
                 | TLSA    | 826.16   | 3.2     |
                 | PLTR    | 25.64    | 21      |
             And exchange rates fetched from exchangeratesapi.io
@@ -47,7 +48,7 @@ Feature: Wallet
         Example: Converting to EUR
             Given a wallet containing 3 stocks
                 | type    | value    | shares  |
-                | Bitcoin | 37540.00 | 0.06215 |
+                | BTC/USD | 37540.00 | 0.06215 |
                 | TLSA    | 826.16   | 3.2     |
                 | PLTR    | 25.64    | 21      |
             And USD to "EUR" rate is 0.8248783304
@@ -58,7 +59,7 @@ Feature: Wallet
         Example: Converting to JPY
             Given a wallet containing 3 stocks
                 | type    | value    | shares  |
-                | Bitcoin | 37540.00 | 0.06215 |
+                | BTC/USD | 37540.00 | 0.06215 |
                 | TLSA    | 826.16   | 3.2     |
                 | PLTR    | 25.64    | 21      |
             And USD to "JPY" rate is 103.7202012703
@@ -69,7 +70,7 @@ Feature: Wallet
         Example: Converting to JPY using exchangeratesapi.io
             Given a wallet containing 3 stocks
                 | type    | value    | shares  |
-                | Bitcoin | 37540.00 | 0.06215 |
+                | BTC/USD | 37540.00 | 0.06215 |
                 | TLSA    | 826.16   | 3.2     |
                 | PLTR    | 25.64    | 21      |
             And exchange rates fetched from exchangeratesapi.io

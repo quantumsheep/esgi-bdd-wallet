@@ -1,0 +1,28 @@
+{
+  "name": "esgi-bdd-wallet",
+  "version": "1.0.0",
+  "description": "ESGI BDD Wallet",
+  "main": "dist/app.js",
+  "scripts": {
+    "build": "tsc",
+    "postbuild": "copyfiles -u 1 src/features/**/*.feature dist",
+    "cucumber": "npm run build && cucumber-js dist/features/**/*.feature"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/quantumsheep/esgi-bdd-wallet.git"
+  },
+  "keywords": [],
+  "author": "quantumsheep <nathanael.dmc@outlook.fr>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/quantumsheep/esgi-bdd-wallet/issues"
+  },
+  "homepage": "https://github.com/quantumsheep/esgi-bdd-wallet#readme",
+  "devDependencies": {
+    "@cucumber/cucumber": "^7.0.0",
+    "@types/node": "^14.14.21",
+    "copyfiles": "^2.4.1",
+    "typescript": "^4.1.3"
+  }
+}

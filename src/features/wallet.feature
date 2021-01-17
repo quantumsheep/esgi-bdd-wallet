@@ -35,15 +35,6 @@ Feature: Wallet
             Then an error is returned
             And value should be null
 
-    Rule: Return 0 when the wallet is empty
-        Example: Converting to EUR
-            Given a wallet containing 0 stocks
-                | type | value | shares |
-            And USD to "EUR" rate is 0.8248783304
-            When converting to "EUR"
-            Then value should be 0.00
-            And error should be null
-
     Rule: Convert each stocks to the target currency
         Example: Converting to EUR
             Given a wallet containing 3 stocks
@@ -76,4 +67,12 @@ Feature: Wallet
             And exchange rates fetched from exchangeratesapi.io
             When converting to "JPY"
             Then value should not be null
+            And error should be null
+
+        Example: Converting with nothing in the wallet
+            Given a wallet containing 0 stocks
+                | type | value | shares |
+            And USD to "EUR" rate is 0.8248783304
+            When converting to "EUR"
+            Then value should be 0.00
             And error should be null

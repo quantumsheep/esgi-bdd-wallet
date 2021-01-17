@@ -6,7 +6,7 @@ interface DataTableGeneric<T> extends DataTable {
   hashes(): T[];
 }
 
-Given('a wallet containing {int} stocks', function (this: WalletWorld, stocks_count: number, stocks: DataTableGeneric<Stock>) {
+Given('a wallet containing stocks', function (this: WalletWorld, stocks: DataTableGeneric<Stock>) {
   this.setStocks(stocks.hashes());
 });
 
@@ -14,8 +14,12 @@ Given('USD to {string} rate is {float}', function (this: WalletWorld, currency: 
   this.setRate(currency, rate);
 });
 
-Given('exchange rates fetched from exchangeratesapi.io', async function (this: WalletWorld) {
+Given('exchange rates are fetched from exchangeratesapi.io', async function (this: WalletWorld) {
   await this.downloadRates();
+});
+
+Given('exchange rate for {string} does not exists', function (this: WalletWorld, currency: string) {
+  this.removeRate(currency);
 });
 
 When('converting to {string}', function (this: WalletWorld, currency: string) {

@@ -75,6 +75,10 @@ export class WalletWorld {
   setRate(currency: string, rate: number) {
     this.rates[currency] = rate;
   }
+
+  removeRate(currency: string) {
+    delete this.rates[currency];
+  }
 }
 
 setWorldConstructor(WalletWorld);

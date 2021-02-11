@@ -14,10 +14,6 @@ Given('USD to {string} rate is {float}', function (this: WalletWorld, currency: 
   this.setRate(currency, rate);
 });
 
-Given('exchange rates are fetched from exchangeratesapi.io', async function (this: WalletWorld) {
-  await this.downloadRates();
-});
-
 Given('exchange rate for {string} does not exists', function (this: WalletWorld, currency: string) {
   this.removeRate(currency);
 });
@@ -33,20 +29,9 @@ Then('an error is returned', function (this: WalletWorld) {
   assert.notEqual(error, undefined);
 });
 
-Then('error should be null', function (this: WalletWorld) {
+Then('error should be {string}', function (this: WalletWorld, expectedError: string) {
   const error = this.getError();
-  assert.equal(error, null);
-});
-
-Then('value should be null', function (this: WalletWorld) {
-  const value = this.getValue();
-  assert.equal(value, null);
-});
-
-Then('value should not be null', function (this: WalletWorld) {
-  const value = this.getValue();
-  assert.notEqual(value, null);
-  assert.notEqual(value, undefined);
+  assert.equal(error.message, expectedError);
 });
 
 Then('value should be {float}', function (this: WalletWorld, expectedValue: number) {
